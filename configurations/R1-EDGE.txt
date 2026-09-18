@@ -1,0 +1,155 @@
+R1-EDGE#show running-config
+Building configuration...
+
+Current configuration : 2811 bytes
+!
+version 15.1
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname R1-EDGE
+!
+!
+!
+enable secret 5 $1$mERr$/7iGNgvgeB/VrdWLQwc4T0
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username admin privilege 15 secret 5 $1$mERr$stv9XYyClKK3uPbik2N7j.
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524PAST-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name cyphoragrid.local
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.10
+ description MANAGEMENT-GATEWAY
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+!
+interface GigabitEthernet0/0.20
+ description FINANCE-GATEWAY
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+!
+interface GigabitEthernet0/0.30
+ description HR-GATEWAY
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.0
+!
+interface GigabitEthernet0/0.40
+ description IT-SECURITY-GATEWAY
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.0
+!
+interface GigabitEthernet0/0.50
+ description SERVERS-GATEWAY
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+ ip access-group SERVER-OUT out
+!
+interface GigabitEthernet0/0.60
+ description DMZ-GATEWAY
+ encapsulation dot1Q 60
+ ip address 192.168.60.1 255.255.255.0
+ ip access-group DMZ-IN in
+!
+interface GigabitEthernet0/0.99
+ description NATIVE-MGMT-GATEWAY
+ encapsulation dot1Q 99 native
+ ip address 192.168.99.1 255.255.255.0
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list standard MGMT-SSH
+ permit 192.168.10.0 0.0.0.255
+ permit 192.168.40.0 0.0.0.255
+ deny any
+ip access-list extended SERVER-OUT
+ permit ip 192.168.10.0 0.0.0.255 192.168.50.0 0.0.0.255
+ permit ip 192.168.20.0 0.0.0.255 192.168.50.0 0.0.0.255
+ permit ip 192.168.30.0 0.0.0.255 192.168.50.0 0.0.0.255
+ permit ip 192.168.40.0 0.0.0.255 192.168.50.0 0.0.0.255
+ deny ip 192.168.60.0 0.0.0.255 192.168.50.0 0.0.0.255
+ permit ip any any
+ip access-list extended DMZ-IN
+ deny ip 192.168.60.0 0.0.0.255 192.168.10.0 0.0.0.255
+ deny ip 192.168.60.0 0.0.0.255 192.168.20.0 0.0.0.255
+ deny ip 192.168.60.0 0.0.0.255 192.168.30.0 0.0.0.255
+ deny ip 192.168.60.0 0.0.0.255 192.168.40.0 0.0.0.255
+ deny ip 192.168.60.0 0.0.0.255 192.168.50.0 0.0.0.255
+ deny ip 192.168.60.0 0.0.0.255 192.168.99.0 0.0.0.255
+ permit ip 192.168.60.0 0.0.0.255 any
+!
+banner motd ^CAUTHORIZED ACCESS ONLY - CYPHORAGRID SECURITY LAB^C
+!
+!
+!
+!
+logging 192.168.50.11
+line con 0
+ password 7 08314D5D1A0B54
+ login
+!
+line aux 0
+!
+line vty 0 4
+ access-class MGMT-SSH in
+ login local
+ transport input ssh
+!
+!
+!
+end
