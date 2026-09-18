@@ -310,8 +310,38 @@ CyphoraGrid/
 │   ├── SW3 port security.png
 │   ├── SW3 trunk.png
 │   └── SW3 vlan.png
-│
 └── testing/
     ├── attack-simulation-results.md
     └── validation-results.md
 ```
+
+---
+
+## 👨‍💻 Author & Maintainer
+
+- **Lead Security Engineer:** [Eswar](https://github.com/Eswar-2006)
+- **Repository:** [CyphoraGrid Enterprise Network Security](https://github.com/Eswar-2006/cyphoragrid-enterprise-network-security)
+- **Domain:** Enterprise Infrastructure, Network Defense & Security Architecture
+
+---
+
+## ⚖️ License & Legal Notice
+
+### Ethical Security & Lab Disclaimer
+This project and its accompanying configurations, topologies, and simulations were developed strictly for educational, research, and defensive architecture demonstration purposes. All attack vectors, scanning procedures, and incident response operations were executed inside an isolated, controlled simulation environment (Cisco Packet Tracer).
+
+### License
+This project is licensed under the **MIT License** — feel free to use and adapt it for educational and portfolio demonstration.
+
+```text
+Copyright (c) 2026 Eswar. All rights reserved.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+```
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ for Enterprise Network Defense & Resilience | © 2026 CyphoraGrid</sub>
+</div>
